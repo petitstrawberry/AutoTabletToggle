@@ -1,0 +1,9 @@
+{
+  "name": "Auto Tablet Toggle",
+  "description": "Toggle auto tabletmode detection",
+  "uuid": "autotablettoggle@ichigo.dev",
+  "shell-version": [
+    "45",
+    "46"
+  ]
+}
