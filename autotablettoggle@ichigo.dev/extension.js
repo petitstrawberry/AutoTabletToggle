@@ -1,3 +1,10 @@
+//
+// extension.js
+// AutoTabletToggle
+//
+// Created by petitstrawberry on 2024/08/26
+//
+
 import GObject from 'gi://GObject';
 import * as Main from 'resource:///org/gnome/shell/ui/main.js';
 import { Extension, gettext as _ } from 'resource:///org/gnome/shell/extensions/extension.js';
