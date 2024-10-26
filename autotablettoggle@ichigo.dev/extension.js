@@ -27,12 +27,26 @@ const TabletModeToggle = GObject.registerClass(
         }
 
         _updateState() {
-            let response = this._sendCmd(1, 0);
-            if (response === 1) {
-                this.checked = true;
-            } else if (response === 0) {
-                this.checked = false;
+            // execute shell command
+            let args = ["tabletmode", "status"]
+            let command = ['laptopcli'].concat(args);
+
+            try {
+                let proc = Gio.Subprocess.new(command, Gio.SubprocessFlags.STDOUT_PIPE);
+
+                proc.communicate_utf8_async(null, null, (proc, res) => {
+                    let [, stdout, stderr] = proc.communicate_utf8_finish(res);
+                    if (stdout.includes('Auto switch: true')) {
+                        this.checked = true;
+                    } else {
+                        this.checked = false;
+                    }
+                });
             }
+            catch (e) {
+                print(e);
+            }
+    
         }
 
         _sendCmd(cmd, data) {
@@ -51,8 +65,38 @@ const TabletModeToggle = GObject.registerClass(
         }
 
         _toggle() {
-            let mode = this.checked ? 1 : 0;
-            this._sendCmd(0, mode);
+            // this._sendCmd(0, mode);
+
+            // execute shell command
+            if (this.checked) {
+                let args = ["tabletmode", "auto"]
+                let command = ['laptopcli'].concat(args);
+                try {
+                    let proc = Gio.Subprocess.new(command, Gio.SubprocessFlags.STDOUT_PIPE);
+                    proc.communicate_utf8_async(null, null, (proc, res) => {
+                        let [, stdout, stderr] = proc.communicate_utf8_finish(res);
+                        print(stdout);
+                    });
+                }
+                catch (e) {
+                    print(e);
+                }
+            } else {
+                let args = ["tabletmode", "no-auto"]
+                let command = ['laptopcli'].concat(args);
+                try {
+                    let proc = Gio.Subprocess.new(command, Gio.SubprocessFlags.STDOUT_PIPE);
+                    proc.communicate_utf8_async(null, null, (proc, res) => {
+                        let [, stdout, stderr] = proc.communicate_utf8_finish(res);
+                        print(stdout);
+                    });
+                }
+                catch (e) {
+                    print(e);
+                }
+            }
+
+
         }
     });
 

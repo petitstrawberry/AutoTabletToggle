@@ -2,12 +2,7 @@
   "name": "Auto Tablet Toggle",
   "description": "Toggle auto tabletmode detection",
   "uuid": "autotablettoggle@ichigo.dev",
-  "shell-version": [
-    "45",
-    "46",
-    "47",
-    "48"
-  ],
+  "shell-version": ["45", "46", "47", "48"],
   "url": "https://github.com/petitstrawberry/AutoTabletToggle",
-  "version": 2
+  "version": 3
 }
